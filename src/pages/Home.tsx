@@ -54,7 +54,6 @@ export function Home() {
       />
 
       <Button
-        activeOpacity={0.7}
         onPress={handleAddNewSkills}
         text="Add"
       />
