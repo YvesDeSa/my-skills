@@ -9,7 +9,7 @@ import {
 
 import { Button } from '../components/Button';
 import React, { useEffect, useState } from 'react'
-import { SkillsCard } from '../components/SkillsCard';
+import { SkillCard } from '../components/SkillCard';
 
 interface SkillData {
   id: string;
@@ -64,7 +64,7 @@ export function Home() {
         data={mySkills}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <SkillsCard skill={item.name} />
+          <SkillCard skill={item.name} />
         )}
       />
     </View>
