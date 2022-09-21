@@ -11,13 +11,22 @@ import { Button } from '../components/Button';
 import React, { useEffect, useState } from 'react'
 import { SkillsCard } from '../components/SkillsCard';
 
+interface SkillData {
+  id: string;
+  name: string;
+}
+
 export function Home() {
   const [newSkills, setNewSkills] = useState('');
-  const [mySkills, setMySkills] = useState([]);
+  const [mySkills, setMySkills] = useState<SkillData[]>([]);
   const [greeting, setGreeting] = useState('');
 
   function handleAddNewSkills() {
-    setMySkills(oldState => [...oldState, newSkills])
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkills
+    }
+    setMySkills(oldState => [...oldState, data])
   }
 
   useEffect(() => {
@@ -54,9 +63,9 @@ export function Home() {
 
       <FlatList
         data={mySkills}
-        keyExtractor={item => item}
+        keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <SkillsCard skill={item} />
+          <SkillsCard skill={item.name} />
         )}
       />
     </View>
@@ -83,7 +92,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1F1E25',
     color: '#FFF',
     marginTop: 30,
-    padding: Platform.OS === 'ios' ? 15 : 12,
+    padding: Platform.OS === 'ios' ? 17 : 15,
     fontSize: 18,
     borderRadius: 10
   }
